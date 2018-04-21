@@ -14,7 +14,7 @@ class Admin_controller extends CI_Controller {
         $this->load->model('stok_model');
         $this->load->model('user_model');
         $this->load->helper(['form', 'url']);
-        $this->load->library('session');
+        $this->load->library(['session', 'pdf']);
         if ( !isset($this->session->isLoggedIn) && $this->session->isLoggedIn == FALSE) {
             $this->session->set_flashdata('promptLogin', 'You have to login using your account to gain access to our app');
             redirect('login');
@@ -167,6 +167,35 @@ class Admin_controller extends CI_Controller {
                 # code...
                 break;
         }
+    }
+
+    /**
+     * 
+     * report
+     * 
+     * Generate report in PDF
+     * 
+     * @param string $table Tablename 
+     * 
+     */
+    public function report($table)
+    {
+        switch ($table) {
+            case 'barang':
+                $data["barang"] = $this->barang_model->getAll();
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        $now  = new DateTime();
+        $date = $now->format('Y-m-d_H:i:s');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "report-{$table}-{$date}.pdf";
+        $data["title"] = $this->pdf->filename;
+        $this->pdf->renderPdf('admin/report/report_barang', $data);
     }
 
 }

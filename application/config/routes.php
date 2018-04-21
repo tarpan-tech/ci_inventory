@@ -16,6 +16,9 @@ $route['admin/(:any)']      = 'admin_controller/adminPage/$1';
 $route['admin/(:any)/add']           = 'admin_controller/add/$1';
 $route['admin/(:any)/update/(:num)'] = 'admin_controller/update/$1/$2';
 $route['admin/(:any)/delete/(:num)'] = 'admin_controller/delete/$1/$2';
+
+//Report Routes
+$route['admin/(:any)/report/pdf']    = 'admin_controller/report/$1';
 //Default Configuration
 $route['404_override']         = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -29,7 +29,7 @@
             <?php endif; ?>
             <a data-target="#modal-tambah-data" data-toggle="modal" class="btn btn-success hide-on-print"> <i class="fa fa-plus"></i> Tambah Data </a>
             <div class="pull-right">
-                <a href="cetak_data_barang.php" class="btn btn-warning hide-on-print"> <i class="fa fa-print"></i> Cetak Data </a>
+                <a href="<?= site_url('/admin/barang/report/pdf') ?>" class="btn btn-warning hide-on-print"> <i class="fa fa-print"></i> Cetak Data </a>
             </div>
         </div>
     </div>
