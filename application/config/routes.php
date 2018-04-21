@@ -13,7 +13,9 @@ $route['auth/logout']       = 'auth_controller/logout';
 $route['admin/index']       = 'admin_controller/index';
 $route['admin/(:any)']      = 'admin_controller/adminPage/$1';
 //Data Barang Routes
-
+$route['admin/(:any)/add']           = 'admin_controller/add/$1';
+$route['admin/(:any)/update/(:num)'] = 'admin_controller/update/$1/$2';
+$route['admin/(:any)/delete/(:num)'] = 'admin_controller/delete/$1/$2';
 //Default Configuration
 $route['404_override']         = '';
 $route['translate_uri_dashes'] = FALSE;

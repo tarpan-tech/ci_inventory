@@ -3,8 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed!');
 
 class User_model extends CI_Model {
 
-    private $table = 'user';
-
     public function __construct()
     {
         $this->load->database();
@@ -32,6 +30,19 @@ class User_model extends CI_Model {
     public function addUser($data)
     {
         return $this->db->insert('user', $data);        
+    }
+
+    /**
+     * 
+     * getJumlahUser
+     * 
+     * 
+     * Get total rows in table user
+     * 
+     */
+    public function getJumlahUser()
+    {
+        return $this->db->get('user')->num_rows();
     }
 
 }

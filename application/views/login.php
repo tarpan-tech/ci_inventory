@@ -41,6 +41,26 @@
                     <?= $this->session->promptLogin; ?>
                 </div>
             </div>
+        <?php endif; ?>
+        <?php if ( isset( $this->session->userNotFound ) ): ?>
+            <div class="alert alert-danger">
+                <div class="alert-heading">
+                    <div class="pull-right">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    </div>
+                    <?= $this->session->userNotFound; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ( isset( $this->session->passwordIncorrect ) ): ?>
+            <div class="alert alert-danger">
+                <div class="alert-heading">
+                    <div class="pull-right">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    </div>
+                    <?= $this->session->passwordIncorrect; ?>
+                </div>
+            </div>
         <?php endif; ?>  
         <?php if ( isset( $this->session->loggedOut ) ): ?>
             <div class="alert alert-success">

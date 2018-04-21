@@ -49,7 +49,7 @@
                             <i class="fa fa-tasks fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php //echo $jumlah_stok; ?></div>
+                            <div class="huge"><?= $jumlah_stok; ?></div>
                             <div>Data Stok</div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                             <i class="fa fa-shopping-cart fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php //echo $jumlah_barang_masuk; ?></div>
+                            <div class="huge"><?= $jumlah_barang_masuk; ?></div>
                             <div>Data Barang Masuk</div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                             <i class="fa fa-support fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php //echo $jumlah_barang_keluar; ?></div>
+                            <div class="huge"><?= $jumlah_barang_keluar; ?></div>
                             <div>Data Barang Keluar</div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php //echo $jumlah_pinjam_barang; ?></div>
+                            <div class="huge"><?= $jumlah_pinjam_barang; ?></div>
                             <div>Data Pinjam Barang</div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php //echo $jumlah_supplier; ?></div>
+                            <div class="huge"><?=  $jumlah_supplier; ?></div>
                             <div>Data Supplier</div>
                         </div>
                     </div>
@@ -159,12 +159,12 @@
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php //echo $jumlah_user; ?></div>
+                            <div class="huge"><?=  $jumlah_user; ?></div>
                             <div>Data User</div>
                         </div>
                     </div>
                 </div>
-                <a href="<?= site_url('/admin/stok'); ?>">
+                <a href="<?= site_url('/admin/user'); ?>">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

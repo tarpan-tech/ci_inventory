@@ -60,20 +60,33 @@ Class Auth_controller extends CI_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $userdata = $this->user_model->getUserByUsername($username)->result();
-        foreach($userdata as $user):
-            if ( password_verify($password, $user->password) ):
-                $this->session->set_userdata([
-                    'id_user'    => $user->id_user,
-                    'nama'       => $user->nama,
-                    'username'   => $user->username,
-                    'level'      => $user->level,
-                    'isLoggedIn' => TRUE
-                ]);
-                $this->session->set_flashdata('loggedIn', "Welcome, {$this->session->username}. You are logged in as {$this->session->level} ");
-                redirect('admin/dashboard');
-            endif;
-        endforeach;
+        $userdata = $this->user_model->getUserByUsername($username);        
+        //If user(s) exists
+        if ( $userdata->num_rows() > 0):
+            //Fetch user(s) data
+            $result = $userdata->result();
+                foreach($result as $user):
+                    //Compare user(s) password
+                    if ( password_verify($password, $user->password) ):
+                        $this->session->set_userdata([
+                            'id_user'    => $user->id_user,
+                            'nama'       => $user->nama,
+                            'username'   => $user->username,
+                            'level'      => $user->level,
+                            'isLoggedIn' => TRUE
+                        ]);
+                        $this->session->set_flashdata('loggedIn', "Welcome, {$this->session->username}. You are logged in as {$this->session->level} ");
+                        redirect('admin/dashboard');
+                    else:
+                        $this->session->set_flashdata('passwordIncorrect', 'The password you\'re trying to submit is incorrect');
+                        redirect('login');
+                    endif;
+                endforeach;
+        else:
+            var_dump($userdata->num_rows());
+            $this->session->set_flashdata('userNotFound', 'The username you\'re trying to submit is not exist in our system. Please check your username spelling..');
+            redirect('login');
+        endif;
     }
 
     /**

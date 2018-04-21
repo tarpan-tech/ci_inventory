@@ -7,33 +7,23 @@
     </div>
     <div class="row">
         <div class="col-md-12" style="padding: 15px;">
-            <?php if ( isset($_SESSION["notif"]) ): ?>
-            <?php
-                if ( isset($_SESSION["notif_type"]) ):
-                    switch ($_SESSION["notif_type"]) {
-                        case 'success':
-                            echo "<div class='alert alert-success'>";
-                            break;
-                        case 'error':
-                            echo "<div class='alert alert-danger'>";
-                            break;
-                        case 'warning':
-                            echo "<div class='alert alert-warning'>";
-                            break;
-                        case 'info':
-                            echo "<div class='alert alert-info'>";
-                            break;
-                        default:
-                            echo "<div class='alert'>";
-                            break;
-                    }
-                endif;
-                ?>
+            <?php if ( isset($this->session->success) ): ?>
+                <div class="alert alert-success">
                     <div class="alert-heading">
                         <div class="pull-right">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         </div>
-                        <?= $_SESSION["notif"]; ?>
+                        <?= $this->session->success; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if ( isset($this->session->failed) ): ?>
+                <div class="alert alert-error">
+                    <div class="alert-heading">
+                        <div class="pull-right">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                        <?= $this->session->failed; ?>
                     </div>
                 </div>
             <?php endif; ?>
@@ -106,7 +96,7 @@
         <h4 class="modal-title" id="myModalLabel"> <i class="fa fa-bar-chart-o fa-fw"></i> Tambah Data Barang</h4>
       </div>
       <div class="modal-body">
-          <?= form_open(''); ?>
+          <?= form_open('/admin/barang/add', ['class' => 'form-horizontal']); ?>
             <div class="form-group">
                 <label class="control-label col-md-3">Kode Barang</label>
                 <div class="col-md-9">
@@ -166,7 +156,7 @@
              <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
              <button type="submit" class="btn btn-primary">Tambah</button>
           </div>
-      </form>
+      <?= form_close(); ?>
     </div>
   </div>
 </div>
@@ -181,7 +171,7 @@
         <h4 class="modal-title" id="myModalLabel"> <i class="fa fa-bar-chart-o fa-fw"></i> Ubah Data Barang</h4>
       </div>
       <div class="modal-body">
-          <form class="form-horizontal" method="POST" action="proses_ubah_barang.php">
+          <?= form_open("/admin/barang/update/{$row->kode_barang}", ['class' => 'form-horizontal']); ?>
             <div class="form-group">
                 <label class="control-label col-md-3">Kode Barang</label>
                 <div class="col-md-9">
@@ -261,7 +251,7 @@
       </div><!-- Modal Body -->
       <div class="modal-footer">
         <button type="button" class="btn btn-info" data-dismiss="modal">Kembali</button>
-        <a href="<?php echo site_url('/hapus/'.$row->kode_barang); ?>" class="btn btn-danger">Hapus</a>
+        <a href="<?php echo site_url('/admin/barang/delete/'.$row->kode_barang); ?>" class="btn btn-danger">Hapus</a>
       </div>
     </div>
   </div>
