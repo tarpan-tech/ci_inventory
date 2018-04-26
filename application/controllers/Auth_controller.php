@@ -9,7 +9,7 @@ Class Auth_controller extends CI_Controller {
         $this->load->database();
         $this->load->model('user_model');
         $this->load->helper(['form', 'url']);
-        $this->load->library(['form_validation', 'session', 'parser']);
+        $this->load->library(['form_validation', 'session', 'parser', 'auth']);
     }
 
     /**
@@ -21,30 +21,44 @@ Class Auth_controller extends CI_Controller {
      */
     public function register()
     {
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required|callback_isUnique');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('level', 'Level', 'required');        
+        $config = [
+            [
+                'field' => 'nama',
+                'label' => 'Nama',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'required|callback_isUnique'
+            ],
+            [
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'level',
+                'label' => 'Level',
+                'rules' => 'required'
+            ],            
+        ];
+        $this->form_validation->set_rules($config);
 
         if ( $this->form_validation->run() == FALSE ) {
             $this->load->view('register');
         } else {
-            $nama     = $this->input->post('nama');
-            $username = $this->input->post('username');
-            $password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
-            $level    = $this->input->post('level');    
-
             $data = [
-                'nama' => $nama,
-                'username' => $username,
-                'password' => $password,
-                'level' => $level
+                'nama'     => $this->input->post('nama'),
+                'username' => $this->input->post('username'),
+                'password' => $this->input->post('password'),
+                'level'    => $this->input->post('level')
             ];
 
-            if ( $this->user_model->addUser($data) ):
+            if ( $this->auth->register($data) == TRUE) {
                 $this->session->set_flashdata('registerSuccess', 'Your account successfully created in our website, please login here..');
                 redirect('login');
-            endif;
+            }
         }
     }
 
@@ -60,48 +74,18 @@ Class Auth_controller extends CI_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $userdata = $this->user_model->getUserByUsername($username);        
-        //If user(s) exists
-        if ( $userdata->num_rows() > 0):
-            //Fetch user(s) data
-            $result = $userdata->result();
-                foreach($result as $user):
-                    //Compare user(s) password
-                    if ( password_verify($password, $user->password) ):
-                        $this->session->set_userdata([
-                            'id_user'    => $user->id_user,
-                            'nama'       => $user->nama,
-                            'username'   => $user->username,
-                            'level'      => $user->level,
-                            'isLoggedIn' => TRUE
-                        ]);
-                        $this->session->set_flashdata('loggedIn', "Welcome, {$this->session->username}. You are logged in as {$this->session->level} ");
-                        redirect('admin/dashboard');
-                    else:
-                        $this->session->set_flashdata('passwordIncorrect', 'The password you\'re trying to submit is incorrect');
-                        redirect('login');
-                    endif;
-                endforeach;
-        else:
-            var_dump($userdata->num_rows());
-            $this->session->set_flashdata('userNotFound', 'The username you\'re trying to submit is not exist in our system. Please check your username spelling..');
-            redirect('login');
-        endif;
+        $this->auth->login($username, $password);
     }
 
     /**
      * logout
      * 
-     * Clear current session and remove user session
+     * Clear current session and log out user from the app
      * 
      */
     public function logout()
     {
-        $this->session->unset_userdata([
-            'id_user', 'nama', 'username', 'level', 'isLoggedIn'
-        ]);
-        $this->session->set_flashdata('loggedOut', 'You are successfully logged out from our app!');
-        redirect('login');
+        $this->auth->logout();
     }
 
     /**
@@ -115,7 +99,7 @@ Class Auth_controller extends CI_Controller {
     {
         $username = $this->user_model->getUserByUsername($username);
         if ( $username->num_rows() > 0 ) {
-            $this->form_validation->set_message('is_unique', 'You can\'t use this username because it\'s already exists');
+            $this->form_validation->set_message('isUnique', 'You can\'t use this username because it\'s already exists');
             return FALSE;
         } else {
             return TRUE;

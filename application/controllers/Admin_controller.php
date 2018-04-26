@@ -14,11 +14,9 @@ class Admin_controller extends CI_Controller {
         $this->load->model('stok_model');
         $this->load->model('user_model');
         $this->load->helper(['form', 'url']);
-        $this->load->library(['session', 'pdf']);
-        if ( !isset($this->session->isLoggedIn) && $this->session->isLoggedIn == FALSE) {
-            $this->session->set_flashdata('promptLogin', 'You have to login using your account to gain access to our app');
-            redirect('login');
-        }
+        $this->load->library(['session', 'pdf', 'auth']);
+        //Check user's authentication
+        $this->auth->isLoggedIn();
     }
 
     public function index()
