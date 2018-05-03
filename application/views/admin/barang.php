@@ -29,7 +29,8 @@
             <?php endif; ?>
             <a data-target="#modal-tambah-data" data-toggle="modal" class="btn btn-success hide-on-print"> <i class="fa fa-plus"></i> Tambah Data </a>
             <div class="pull-right">
-                <a href="<?= site_url('/admin/barang/report/pdf') ?>" class="btn btn-warning hide-on-print"> <i class="fa fa-print"></i> Cetak Data </a>
+                <a href="<?= site_url('/admin/barang/report/excel') ?>" class="btn btn-success hide-on-print"> <i class="fa fa-file-excel-o"></i> Excel </a>
+                <a href="<?= site_url('/admin/barang/report/pdf') ?>" class="btn btn-danger hide-on-print"> <i class="fa fa-print"></i> PDF </a>
             </div>
         </div>
     </div>
@@ -51,7 +52,6 @@
                             <th>Kategori</th>
                             <th>Jumlah Barang</th>
                             <th>Kondisi</th>
-                            <th>Jenis Barang</th>
                             <th>Sumber Dana</th>
                             <th>Aksi</th>
                         </tr>
@@ -70,7 +70,6 @@
                             <td><?= $row->kategori; ?></td>
                             <td><?= $row->jml_barang; ?></td>
                             <td><?= $row->kondisi; ?></td>
-                            <td><?= $row->jenis_barang; ?></td>
                             <td><?= $row->sumber_dana; ?></td>
                             <td style="min-width: 175px;">
                                 <a data-target="#modal-edit-data<?= $row->kode_barang; ?>" data-toggle="modal" class="btn btn-info"> <i class="fa fa-pencil"></i> Edit </a>
@@ -140,12 +139,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3">Jenis Barang</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" name="jenis_barang" placeholder="Jenis Barang">
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="control-label col-md-3">Sumber Dana</label>
                 <div class="col-md-9">
                     <input type="text" class="form-control" name="sumber_dana" placeholder="Sumber Dana">
@@ -212,12 +205,6 @@
                 <label class="control-label col-md-3">Kondisi</label>
                 <div class="col-md-9">
                     <input type="text" class="form-control" name="kondisi" placeholder="Kondisi"  value="<?= $row->kondisi; ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3">Jenis Barang</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" name="jenis_barang" placeholder="Jenis Barang"  value="<?= $row->jenis_barang; ?>">
                 </div>
             </div>
             <div class="form-group">

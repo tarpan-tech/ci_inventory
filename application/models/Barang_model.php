@@ -63,15 +63,14 @@ class Barang_model extends CI_Model {
      * 
      * Update data from table 'barang'
      * 
-     * @param string $table Tablename
      * @param int    $id Data's ID
      * @param array  $data Associative Array contains fieldname and new data
      * 
      */
-    public function updateBarang($table, $id, $data)
+    public function updateBarang($id, $data)
     {
         return $this->db->where('kode_barang', $id)
-                        ->update($table, $data);
+                        ->update('barang', $data);
     }
 
     /**
@@ -80,13 +79,12 @@ class Barang_model extends CI_Model {
      * 
      * Delete data from table 'barang'
      * 
-     * @param string $table Tablename
      * @param array  $where Associative Array contains fieldname and Data's ID
      * 
      */
-    public function deleteBarang($table, $where)
+    public function deleteBarang($where)
     {
-        return $this->db->delete($table, $where);
+        return $this->db->delete('barang', $where);
     }
 
 }

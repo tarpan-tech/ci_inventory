@@ -7,7 +7,7 @@
     <title><?= $title; ?></title>
 </head>
     <body>
-        <h1 style="text-align: center;"> Data Barang </h1>
+        <h1 style="text-align: center;"> Data User </h1>
 
         <hr>
 
@@ -19,23 +19,17 @@
 
         <table border="1" style="width: 100%; border-collapse: collapse;" cellpadding="10">
             <tr>
-                <th>Kode Barang</th>
-                <th>Nama Barang</th>
-                <th>Spesifikasi</th>
-                <th>Lokasi Barang</th>
-                <th>Kategori</th>
-                <th>Jumlah Barang</th>
-                <th>Sumber Dana</th>
+                <th>ID User</th>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>Level</th>
             </tr>
-            <?php foreach($barang as $row): ?>
+            <?php foreach($user as $row): ?>
             <tr>
-                <td><?= $row->kode_barang; ?></td>
-                <td><?= $row->nama_barang; ?></td>
-                <td><?= $row->spesifikasi; ?></td>
-                <td><?= $row->lokasi_barang; ?></td>
-                <td><?= $row->kategori; ?></td>
-                <td><?= $row->jml_barang; ?></td>
-                <td><?= $row->sumber_dana; ?></td>
+                <td><?= $row->id_user; ?></td>
+                <td><?= $row->nama; ?></td>
+                <td><?= $row->username; ?></td>
+                <td><?= $row->level; ?></td>
             </tr>
             <?php endforeach; ?>
         </table>    

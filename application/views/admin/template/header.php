@@ -69,7 +69,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="?halaman=dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="<?= site_url('/admin/dashboard'); ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Data Master <span class="fa arrow"></span></a>

@@ -41,7 +41,7 @@ Class Auth_controller extends CI_Controller {
                 'field' => 'level',
                 'label' => 'Level',
                 'rules' => 'required'
-            ],            
+            ]
         ];
         $this->form_validation->set_rules($config);
 

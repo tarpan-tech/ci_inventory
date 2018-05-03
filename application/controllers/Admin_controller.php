@@ -14,17 +14,26 @@ class Admin_controller extends CI_Controller {
         $this->load->model('stok_model');
         $this->load->model('user_model');
         $this->load->helper(['form', 'url']);
-        $this->load->library(['session', 'pdf', 'auth']);
+        $this->load->library(['session', 'pdf', 'auth', 'excel']);
         //Check user's authentication
         $this->auth->isLoggedIn();
     }
 
     public function index()
     {
+        $data["jumlah_barang"]        = $this->barang_model->getJumlahBarang();
+        $data["jumlah_barang_masuk"]  = $this->barang_masuk_model->getJumlahBarangMasuk(); 
+        $data["jumlah_barang_keluar"] = $this->barang_keluar_model->getJumlahBarangKeluar();
+        $data["jumlah_pinjam_barang"] = $this->pinjam_barang_model->getJumlahPinjamBarang();
+        $data["jumlah_supplier"]      = $this->supplier_model->getJumlahSupplier();
+        $data["jumlah_stok"]          = $this->stok_model->getJumlahStok();
+        $data["jumlah_user"]          = $this->user_model->getJumlahUser();
+
         $this->load->view('admin/template/header');
-        $this->load->view('admin/dashboard');
+        $this->load->view('admin/dashboard', $data);
         $this->load->view('admin/template/footer');
     }
+
 
     /**
      * adminPage
@@ -56,7 +65,6 @@ class Admin_controller extends CI_Controller {
             break;
         }
 
-
 		if( !file_exists(APPPATH."views/admin/".$page.'.php') ) {
 	        show_404();
 		} else {
@@ -64,136 +72,6 @@ class Admin_controller extends CI_Controller {
             $this->load->view('admin/'.$page, $data);
             $this->load->view('admin/template/footer');
         }
-    }
-    
-    /**
-     * 
-     * add
-     * 
-     * Insert data into database
-     * @param string $table Tablename
-     * 
-     */
-    public function add($table)
-    {
-        switch ($table) {
-            case 'barang':
-                $insert = $this->barang_model->addBarang([
-                    "kode_barang"   => $this->input->post('kode_barang', TRUE),
-                    "nama_barang"   => $this->input->post('nama_barang', TRUE),
-                    "spesifikasi"   => $this->input->post('spesifikasi', TRUE),
-                    "lokasi_barang" => $this->input->post('lokasi_barang', TRUE),
-                    "kategori"      => $this->input->post('kategori', TRUE),
-                    "jml_barang"    => $this->input->post('jumlah_barang', TRUE),
-                    "kondisi"       => $this->input->post('kondisi', TRUE),
-                    "jenis_barang"  => $this->input->post('jenis_barang', TRUE),
-                    "sumber_dana"   => $this->input->post('sumber_dana', TRUE)
-                ]);
-                if ($insert){
-                    $this->session->set_flashdata('success', 'Successfully added data barang!');
-                    redirect('/admin/barang');
-                } else {
-                    $this->session->set_flashdata('failed', "Something went wrong, failed adding data barang..<br>{$this->db->error()}");
-                    redirect('/admin/barang');
-                }
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-
-    }
-
-    /**
-     * 
-     * update
-     * 
-     * Update data
-     * @param string $table Tablename
-     * @param int $id Data's ID based on column with PK Attribute
-     * 
-     */
-    public function update($table, $id = NULL)
-    {
-        switch ($table) {
-            case 'barang':
-                $update = $this->barang_model->updateBarang($table, $id, [
-                    "kode_barang"   => $this->input->post('kode_barang', TRUE),
-                    "nama_barang"   => $this->input->post('nama_barang', TRUE),
-                    "spesifikasi"   => $this->input->post('spesifikasi', TRUE),
-                    "lokasi_barang" => $this->input->post('lokasi_barang', TRUE),
-                    "kategori"      => $this->input->post('kategori', TRUE),
-                    "jml_barang"    => $this->input->post('jumlah_barang', TRUE),
-                    "kondisi"       => $this->input->post('kondisi', TRUE),
-                    "jenis_barang"  => $this->input->post('jenis_barang', TRUE),
-                    "sumber_dana"   => $this->input->post('sumber_dana', TRUE)
-                ]);
-                if ($update){
-                    $this->session->set_flashdata('success', 'Successfully updated data barang!');
-                    redirect('/admin/barang');
-                } else {
-                    $this->session->set_flashdata('failed', "Something went wrong, failed updating data barang..<br>{$this->db->error()}");
-                    redirect('/admin/barang');
-                }
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-
-
-    }
-
-    //Delete one item
-    public function delete($table, $id = NULL )
-    {
-        switch ($table) {
-            case 'barang':
-                $delete = $this->barang_model->deleteBarang($table, ['kode_barang' => $id]);
-                if ($delete){
-                    $this->session->set_flashdata('success', 'Successfully deleted data barang!');
-                    redirect('/admin/barang');
-                } else {
-                    $this->session->set_flashdata('failed', "Something went wrong, failed deleting data barang..<br>{$this->db->error()}");
-                    redirect('/admin/barang');
-                }
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-    }
-
-    /**
-     * 
-     * report
-     * 
-     * Generate report in PDF
-     * 
-     * @param string $table Tablename 
-     * 
-     */
-    public function report($table)
-    {
-        switch ($table) {
-            case 'barang':
-                $data["barang"] = $this->barang_model->getAll();
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-
-        $now  = new DateTime();
-        $date = $now->format('Y-m-d_H:i:s');
-        $this->pdf->setPaper('A4', 'portrait');
-        $this->pdf->filename = "report-{$table}-{$date}.pdf";
-        $data["title"] = $this->pdf->filename;
-        $this->pdf->renderPdf('admin/report/report_barang', $data);
-    }
+    }    
 
 }
