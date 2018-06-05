@@ -33,13 +33,13 @@ class Stok_model extends CI_Model {
 
     /**
      * 
-     * getJumlahStok
+     * getJumlah
      * 
      * 
      * Get total rows in table stok
      * 
      */
-    public function getJumlahStok()
+    public function getJumlah()
     {
         return $this->db->get('stok')->num_rows();
     }
@@ -47,21 +47,21 @@ class Stok_model extends CI_Model {
 
     /**
      * 
-     * addStok
+     * add
      * 
      * Insert data into table 'stok'
      * 
      * @param array $data Associative Array contains fieldname and data
      * 
      */
-    public function addStok($data)
+    public function add($data)
     {
         return $this->db->insert('stok', $data, TRUE);
     }
 
     /**
      * 
-     * updateStok
+     * update
      * 
      * Update data from table 'stok'
      * 
@@ -69,7 +69,7 @@ class Stok_model extends CI_Model {
      * @param array  $data Associative Array contains fieldname and new data
      * 
      */
-    public function updateStok($id, $data)
+    public function update($id, $data)
     {
         return $this->db->where('kode_stok', $id)
                         ->update('stok', $data);
@@ -77,14 +77,14 @@ class Stok_model extends CI_Model {
 
     /**
      * 
-     * deleteStok
+     * delete
      * 
      * Delete data from table 'stok'
      * 
      * @param array  $where Associative Array contains fieldname and Data's ID
      * 
      */
-    public function deleteStok($where)
+    public function delete($where)
     {
         return $this->db->delete('stok', $where);
     }

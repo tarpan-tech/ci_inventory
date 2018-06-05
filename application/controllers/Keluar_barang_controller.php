@@ -41,7 +41,7 @@ class Keluar_barang_controller extends CI_Controller {
      */
     public function add()
     {
-        $insert = $this->barang_keluar_model->addBarangKeluar([
+        $insert = $this->barang_keluar_model->add([
             "id_keluar_barang"    => $this->input->post('id_keluar_barang', TRUE),
             "no_pinjam"           => $this->input->post('no_pinjam', TRUE),
             "tanggal_keluar"      => $this->input->post('tanggal_keluar', TRUE),
@@ -69,7 +69,7 @@ class Keluar_barang_controller extends CI_Controller {
      */
     public function update($id = NULL)
     {
-        $update = $this->barang_keluar_model->updateBarangKeluar($id, [
+        $update = $this->barang_keluar_model->update($id, [
             "id_keluar_barang"    => $this->input->post('id_keluar_barang', TRUE),
             "no_pinjam"           => $this->input->post('no_pinjam', TRUE),
             "tanggal_keluar"      => $this->input->post('tanggal_keluar', TRUE),
@@ -89,7 +89,7 @@ class Keluar_barang_controller extends CI_Controller {
     //Delete one item
     public function delete($id = NULL )
     {
-        $delete = $this->barang_keluar_model->deleteBarangKeluar(['id_keluar_barang' => $id]);
+        $delete = $this->barang_keluar_model->delete(['id_keluar_barang' => $id]);
         if ($delete){
             $this->session->set_flashdata('success', 'Successfully deleted data keluar_barang!');
             redirect('/admin/keluar_barang');

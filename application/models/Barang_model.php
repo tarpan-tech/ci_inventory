@@ -43,33 +43,33 @@ class Barang_model extends CI_Model {
 
     /**
      * 
-     * getJumlahBarang
+     * getJumlah
      * 
      * Get total rows in table barang
      * 
      */
-    public function getJumlahBarang()
+    public function getJumlah()
     {
         return $this->db->get('barang')->num_rows();
     }
 
     /**
      * 
-     * addBarang
+     * add
      * 
      * Insert data into table 'barang'
      * 
      * @param array $data Associative Array contains fieldname and data
      * 
      */
-    public function addBarang($data)
+    public function add($data)
     {
         return $this->db->insert('barang', $data, TRUE);
     }
 
     /**
      * 
-     * updateBarang
+     * update
      * 
      * Update data from table 'barang'
      * 
@@ -77,7 +77,7 @@ class Barang_model extends CI_Model {
      * @param array  $data Associative Array contains fieldname and new data
      * 
      */
-    public function updateBarang($id, $data)
+    public function update($id, $data)
     {
         return $this->db->where('kode_barang', $id)
                         ->update('barang', $data);
@@ -85,14 +85,14 @@ class Barang_model extends CI_Model {
 
     /**
      * 
-     * deleteBarang
+     * delete
      * 
      * Delete data from table 'barang'
      * 
      * @param array  $where Associative Array contains fieldname and Data's ID
      * 
      */
-    public function deleteBarang($where)
+    public function delete($where)
     {
         return $this->db->delete('barang', $where);
     }

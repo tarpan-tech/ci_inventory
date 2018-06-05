@@ -33,7 +33,7 @@ class User_controller extends CI_Controller {
      */
     public function add()
     {
-        $insert = $this->user_model->addUser([
+        $insert = $this->user_model->add([
             "id_user"  => $this->input->post('id_user', TRUE),
             "nama"     => $this->input->post('nama', TRUE),
             "username" => $this->input->post('username', TRUE),
@@ -59,7 +59,7 @@ class User_controller extends CI_Controller {
      */
     public function update($id = NULL)
     {
-        $update = $this->user_model->updateUser($id, [
+        $update = $this->user_model->update($id, [
             "id_user"  => $this->input->post('id_user', TRUE),
             "nama"     => $this->input->post('nama', TRUE),
             "username" => $this->input->post('username', TRUE),
@@ -77,7 +77,7 @@ class User_controller extends CI_Controller {
     //Delete one item
     public function delete($id = NULL )
     {
-        $delete = $this->user_model->deleteUser(['id_user' => $id]);
+        $delete = $this->user_model->delete(['id_user' => $id]);
         if ($delete){
             $this->session->set_flashdata('success', 'Successfully deleted data user!');
             redirect('/admin/user');

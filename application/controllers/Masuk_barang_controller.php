@@ -43,7 +43,7 @@ class Masuk_barang_controller extends CI_Controller {
      */
     public function add()
     {
-        $insert = $this->barang_masuk_model->addPinjamBarang([
+        $insert = $this->barang_masuk_model->add([
             "id_masuk_barang" => $this->input->post('id_masuk_barang', TRUE),
             "kode_supplier"   => $this->input->post('kode_supplier', TRUE),
             "kode_barang"     => $this->input->post('kode_barang', TRUE),
@@ -70,7 +70,7 @@ class Masuk_barang_controller extends CI_Controller {
      */
     public function update($id = NULL)
     {
-        $update = $this->barang_masuk_model->updatePinjamBarang($id, [
+        $update = $this->barang_masuk_model->update($id, [
             "id_masuk_barang" => $this->input->post('id_masuk_barang', TRUE),
             "kode_supplier"   => $this->input->post('kode_supplier', TRUE),
             "kode_barang"     => $this->input->post('kode_barang', TRUE),
@@ -89,7 +89,7 @@ class Masuk_barang_controller extends CI_Controller {
     //Delete one item
     public function delete($id = NULL )
     {
-        $delete = $this->barang_masuk_model->deletePinjamBarang(['id_masuk_barang' => $id]);
+        $delete = $this->barang_masuk_model->delete(['id_masuk_barang' => $id]);
         if ($delete){
             $this->session->set_flashdata('success', 'Successfully deleted data barang_masuk!');
             redirect('/admin/masuk_barang');

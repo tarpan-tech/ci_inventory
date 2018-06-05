@@ -39,7 +39,7 @@ class Supplier_controller extends CI_Controller {
      */
     public function add()
     {
-        $insert = $this->supplier_model->addSupplier([
+        $insert = $this->supplier_model->add([
             "kode_supplier"   => $this->input->post('kode_supplier', TRUE),
             "nama_supplier"   => $this->input->post('nama_supplier', TRUE),
             "alamat_supplier" => $this->input->post('alamat_supplier', TRUE),
@@ -66,7 +66,7 @@ class Supplier_controller extends CI_Controller {
      */
     public function update($id = NULL)
     {
-        $update = $this->supplier_model->updateSupplier($id, [
+        $update = $this->supplier_model->update($id, [
             "kode_supplier"   => $this->input->post('kode_supplier', TRUE),
             "nama_supplier"   => $this->input->post('nama_supplier', TRUE),
             "alamat_supplier" => $this->input->post('alamat_supplier', TRUE),
@@ -85,7 +85,7 @@ class Supplier_controller extends CI_Controller {
     //Delete one item
     public function delete($id = NULL )
     {
-        $delete = $this->supplier_model->deleteSupplier(['kode_supplier' => $id]);
+        $delete = $this->supplier_model->delete(['kode_supplier' => $id]);
         if ($delete){
             $this->session->set_flashdata('success', 'Successfully deleted data supplier!');
             redirect('/admin/supplier');

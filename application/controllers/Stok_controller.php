@@ -41,7 +41,7 @@ class Stok_controller extends CI_Controller {
      */
     public function add()
     {
-        $insert = $this->stok_model->addStok([
+        $insert = $this->stok_model->add([
             "kode_stok"            => $this->input->post('kode_stok', TRUE),
             "kode_barang"          => $this->input->post('kode_barang', TRUE),
             "jumlah_barang_masuk"  => $this->input->post('jumlah_barang_masuk', TRUE),
@@ -69,7 +69,7 @@ class Stok_controller extends CI_Controller {
      */
     public function update($id = NULL)
     {
-        $update = $this->stok_model->updateStok($id, [
+        $update = $this->stok_model->update($id, [
             "kode_stok"            => $this->input->post('kode_stok', TRUE),
             "kode_barang"          => $this->input->post('kode_barang', TRUE),
             "jumlah_barang_masuk"  => $this->input->post('jumlah_barang_masuk', TRUE),
@@ -89,7 +89,7 @@ class Stok_controller extends CI_Controller {
     //Delete one item
     public function delete($id = NULL )
     {
-        $delete = $this->stok_model->deleteStok(['kode_stok' => $id]);
+        $delete = $this->stok_model->delete(['kode_stok' => $id]);
         if ($delete){
             $this->session->set_flashdata('success', 'Successfully deleted data stok!');
             redirect('/admin/stok');

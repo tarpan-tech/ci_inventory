@@ -43,34 +43,34 @@ class Pinjam_barang_model extends CI_Model {
 
     /**
      * 
-     * getJumlahPinjamBarang
+     * getJumlah
      * 
      * 
      * Get total rows in table pinjam_barang
      * 
      */
-    public function getJumlahPinjamBarang()
+    public function getJumlah()
     {
         return $this->db->get('pinjam_barang')->num_rows();
     }
 
     /**
      * 
-     * addPinjamBarang
+     * add
      * 
      * Insert data into table 'pinjam_barang'
      * 
      * @param array $data Associative Array contains fieldname and data
      * 
      */
-    public function addPinjamBarang($data)
+    public function add($data)
     {
         return $this->db->insert('pinjam_barang', $data, TRUE);
     }
 
     /**
      * 
-     * updatePinjamBarang
+     * update
      * 
      * Update data from table 'pinjam_barang'
      * 
@@ -78,7 +78,7 @@ class Pinjam_barang_model extends CI_Model {
      * @param array  $data Associative Array contains fieldname and new data
      * 
      */
-    public function updatePinjamBarang($id, $data)
+    public function update($id, $data)
     {
         return $this->db->where('no_pinjam', $id)
                         ->update('pinjam_barang', $data);
@@ -86,14 +86,14 @@ class Pinjam_barang_model extends CI_Model {
 
     /**
      * 
-     * deletePinjamBarang
+     * delete
      * 
      * Delete data from table 'pinjam_barang'
      * 
      * @param array  $where Associative Array contains fieldname and Data's ID
      * 
      */
-    public function deletePinjamBarang($where)
+    public function delete($where)
     {
         return $this->db->delete('pinjam_barang', $where);
     }

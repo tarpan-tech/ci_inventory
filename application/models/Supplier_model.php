@@ -43,34 +43,34 @@ class Supplier_model extends CI_Model {
 
     /**
      * 
-     * getJumlahSupplier
+     * getJumlah
      * 
      * 
      * Get total rows in table supplier
      * 
      */
-    public function getJumlahSupplier()
+    public function getJumlah()
     {
         return $this->db->get('supplier')->num_rows();
     }
 
     /**
      * 
-     * addSupplier
+     * add
      * 
      * Insert data into table 'supplier'
      * 
      * @param array $data Associative Array contains fieldname and data
      * 
      */
-    public function addSupplier($data)
+    public function add($data)
     {
         return $this->db->insert('supplier', $data, TRUE);
     }
 
     /**
      * 
-     * updateSupplier
+     * update
      * 
      * Update data from table 'supplier'
      * 
@@ -78,7 +78,7 @@ class Supplier_model extends CI_Model {
      * @param array  $data Associative Array contains fieldname and new data
      * 
      */
-    public function updateSupplier($id, $data)
+    public function update($id, $data)
     {
         return $this->db->where('kode_supplier', $id)
                         ->update('supplier', $data);
@@ -86,14 +86,14 @@ class Supplier_model extends CI_Model {
 
     /**
      * 
-     * deleteSupplier
+     * delete
      * 
      * Delete data from table 'supplier'
      * 
      * @param array  $where Associative Array contains fieldname and Data's ID
      * 
      */
-    public function deleteSupplier($where)
+    public function delete($where)
     {
         return $this->db->delete('supplier', $where);
     }

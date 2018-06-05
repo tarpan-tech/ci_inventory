@@ -29,13 +29,13 @@ class User_model extends CI_Model {
 
     /**
      * 
-     * getJumlahUser
+     * getJumlah
      * 
      * 
      * Get total rows in table user
      * 
      */
-    public function getJumlahUser()
+    public function getJumlah()
     {
         return $this->db->get('user')->num_rows();
     }
@@ -59,19 +59,19 @@ class User_model extends CI_Model {
     }
 
     /**
-     *   addUser
+     *   add
      *
      *   Add a new user data
      *   @param array $data Associative array contains user's data
      */
-    public function addUser($data)
+    public function add($data)
     {
         return $this->db->insert('user', $data, TRUE);        
     }
 
     /**
      * 
-     * updateUser
+     * update
      * 
      * Update data from table 'user'
      * 
@@ -79,7 +79,7 @@ class User_model extends CI_Model {
      * @param array  $data Associative Array contains fieldname and new data
      * 
      */
-    public function updateUser($id, $data)
+    public function update($id, $data)
     {
         return $this->db->where('id_user', $id)
                         ->update('user', $data);
@@ -87,14 +87,14 @@ class User_model extends CI_Model {
 
     /**
      * 
-     * deleteUser
+     * delete
      * 
      * Delete data from table 'user'
      * 
      * @param array  $where Associative Array contains fieldname and Data's ID
      * 
      */
-    public function deleteUser($where)
+    public function delete($where)
     {
         return $this->db->delete('user', $where);
     }

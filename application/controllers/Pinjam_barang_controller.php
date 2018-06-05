@@ -43,7 +43,7 @@ class Pinjam_barang_controller extends CI_Controller {
      */
     public function add()
     {
-        $insert = $this->pinjam_barang_model->addPinjamBarang([
+        $insert = $this->pinjam_barang_model->add([
             "no_pinjam"       => $this->input->post('no_pinjam', TRUE),
             "kode_barang"     => $this->input->post('kode_barang', TRUE),
             "jumlah_pinjam"   => $this->input->post('jumlah_pinjam', TRUE),
@@ -72,7 +72,7 @@ class Pinjam_barang_controller extends CI_Controller {
      */
     public function update($id = NULL)
     {
-        $update = $this->pinjam_barang_model->updatePinjamBarang($id, [
+        $update = $this->pinjam_barang_model->update($id, [
             "no_pinjam"       => $this->input->post('no_pinjam', TRUE),
             "kode_barang"     => $this->input->post('kode_barang', TRUE),
             "jumlah_pinjam"   => $this->input->post('jumlah_pinjam', TRUE),
@@ -93,7 +93,7 @@ class Pinjam_barang_controller extends CI_Controller {
     //Delete one item
     public function delete($id = NULL )
     {
-        $delete = $this->pinjam_barang_model->deletePinjamBarang(['no_pinjam' => $id]);
+        $delete = $this->pinjam_barang_model->delete(['no_pinjam' => $id]);
         if ($delete){
             $this->session->set_flashdata('success', 'Successfully deleted data pinjam_barang!');
             redirect('/admin/pinjam_barang');
