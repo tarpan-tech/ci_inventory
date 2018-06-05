@@ -39,7 +39,7 @@ class Barang_controller extends CI_Controller {
      */
     public function add()
     {
-        $insert = $this->barang_model->addBarang([
+        $insert = $this->barang_model->add([
             "kode_barang"   => $this->input->post('kode_barang', TRUE),
             "nama_barang"   => $this->input->post('nama_barang', TRUE),
             "spesifikasi"   => $this->input->post('spesifikasi', TRUE),
@@ -69,7 +69,7 @@ class Barang_controller extends CI_Controller {
      */
     public function update($id = NULL)
     {
-        $update = $this->barang_model->updateBarang($table, $id, [
+        $update = $this->barang_model->update($id, [
             "kode_barang"   => $this->input->post('kode_barang', TRUE),
             "nama_barang"   => $this->input->post('nama_barang', TRUE),
             "spesifikasi"   => $this->input->post('spesifikasi', TRUE),
@@ -91,7 +91,7 @@ class Barang_controller extends CI_Controller {
     //Delete one item
     public function delete($id = NULL )
     {
-        $delete = $this->barang_model->deleteBarang(['kode_barang' => $id]);
+        $delete = $this->barang_model->delete(['kode_barang' => $id]);
         if ($delete){
             $this->session->set_flashdata('success', 'Successfully deleted data barang!');
             redirect('/admin/barang');

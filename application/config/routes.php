@@ -33,6 +33,8 @@ $route['admin/(:any)/report/(:any)'] = function($page, $reportType){
     $page = strtolower($page);
     return "{$page}_controller/report/{$reportType}";
 };
+$route['api/jumlah_masuk/(:num)']    = 'api/getJumlahMasuk/$1';
+$route['api/jumlah_keluar/(:num)']   = 'api/getJumlahKeluar/$1';
 //Default Configuration
 $route['404_override']               = '';
 $route['translate_uri_dashes']       = FALSE;

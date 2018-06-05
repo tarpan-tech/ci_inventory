@@ -54,6 +54,22 @@ class Barang_model extends CI_Model {
     }
 
     /**
+     * getJumlahBarang
+     * 
+     * Get jumlah barang by kode barang
+     *
+     * @param int $kode
+     * @return void
+     */
+    public function getJumlahBarang($kode)
+    {
+        return $this->db->select('jml_barang')
+                        ->where('kode_barang', $kode)
+                        ->get('barang')
+                        ->row();
+    }
+
+    /**
      * 
      * add
      * 

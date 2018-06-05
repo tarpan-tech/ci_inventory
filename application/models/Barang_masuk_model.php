@@ -44,6 +44,23 @@ class Barang_masuk_model extends CI_Model {
         return $this->db->get('masuk_barang')->num_rows();
     }
 
+    /**
+     * getJumlahMasuk
+     * 
+     * 
+     * Sum total jumlah masuk by kode barang
+     *
+     * @param int $kode
+     * @return void
+     */
+    public function getJumlahMasuk($kode)
+    {
+        return $this->db->select_sum('jumlah_masuk', 'total_masuk')
+                        ->where('kode_barang', $kode)
+                        ->get('masuk_barang')
+                        ->row();
+    }
+
 
     /**
      * 

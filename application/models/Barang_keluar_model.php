@@ -44,6 +44,24 @@ class Barang_keluar_model extends CI_Model {
         return $this->db->get('keluar_barang')->num_rows();
     }
 
+    /**
+     * getJumlahKeluar
+     * 
+     * 
+     * Sum total jumlah keluar by kode barang
+     *
+     * @param int $kode
+     * @return void
+     */
+    public function getJumlahKeluar($kode)
+    {
+        return $this->db->select_sum('jumlah_barang_keluar', 'total_keluar')
+                        ->from('keluar_barang')
+                        ->join('pinjam_barang', 'keluar_barang.no_pinjam = pinjam_barang.no_pinjam')
+                        ->where('kode_barang', $kode)
+                        ->get()
+                        ->row();
+    }
 
     /**
      * 

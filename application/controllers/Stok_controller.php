@@ -50,8 +50,16 @@ class Stok_controller extends CI_Controller {
             "keterangan"           => $this->input->post('keterangan', TRUE)
         ]);
         if ($insert) {
+            $kode_barang  = $this->input->post('kode_barang');
+            $total_barang = $this->input->post('total_barang');
             $this->session->set_flashdata('success', 'Successfully added data stok!');
-            redirect('/admin/stok');
+            $last_stok = $this->barang_model->getJumlahBarang($kode_barang);
+            $update = $this->barang_model->update($kode_barang, [
+                "jml_barang" => $last_stok->jml_barang + $total_barang
+            ]);
+            if ($update) {
+                redirect('/admin/stok');     
+            }
         } else {
             $this->session->set_flashdata('failed', "Something went wrong, failed adding data stok..<br>{$this->db->error()}");
             redirect('/admin/stok');
